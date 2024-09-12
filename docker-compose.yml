@@ -1,0 +1,80 @@
+version: '3.8'
+name: v_space
+
+services:
+  mysql-server:
+    image: mysql:latest
+    container_name: mysql-server
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: groot
+      MYSQL_PASSWORD: iamgroot
+      MYSQL_DATABASE: search_engine
+    volumes:
+      - ./DB_DUMP.sql:/docker-entrypoint-initdb.d/DB_DUMP.sql
+    ports:
+      - "3307:3306"
+    networks:
+      - custom_network
+
+  media-server:
+    build: ./media_server
+    container_name: media-server
+    restart: unless-stopped
+    depends_on:
+      - mysql-server
+    ports:
+      - "5004:5004"
+    networks:
+      - custom_network
+
+  search:
+    build: ./search
+    container_name: search
+    restart: unless-stopped
+    depends_on:
+      - mysql-server
+    ports:
+      - "5003:5003"
+    networks:
+      - custom_network
+
+  ml-models:
+    build: ./Vision_Transformer
+    container_name: ml-models
+    restart: unless-stopped
+    depends_on:
+      - mysql-server
+    ports:
+      - "5002:5002"
+    networks:
+      - custom_network
+
+  frame-extractor:
+    build: ./frame_extractor
+    container_name: frame-extractor
+    restart: unless-stopped
+    depends_on:
+      - ml-models
+      - media-server
+    ports:
+      - "5001:5001"
+    networks:
+      - custom_network
+
+  web-application:
+    build: ./frontend
+    container_name: web-application
+    restart: unless-stopped
+    depends_on:
+      - search
+      - media-server
+    ports:
+      - "5000:5000"
+    networks:
+      - custom_network
+
+networks:
+  custom_network:
+    driver: bridge

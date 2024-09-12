@@ -1,0 +1,479 @@
+{
+	"info": {
+		"_postman_id": "32f07cdc-3929-41c7-a3ae-536501544ba0",
+		"name": "V Space",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35397815"
+	},
+	"item": [
+		{
+			"name": "Vision Transformer",
+			"item": [
+				{
+					"name": "['/index'] classify keyframes",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "dir",
+									"value": "key_frames",
+									"type": "text"
+								},
+								{
+									"key": "file_upload",
+									"type": "file",
+									"src": "/D:/Code Space/Projects/V Space/frame_extractor/key_frames.zip"
+								},
+								{
+									"key": "vid_name",
+									"value": "vaathi_walking",
+									"type": "text"
+								},
+								{
+									"key": "mode",
+									"value": "standalone",
+									"description": "standalone / default:chained",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5002/index",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5002",
+							"path": [
+								"index"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "['/'] status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5002/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5002",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Frame extractor",
+			"item": [
+				{
+					"name": "['/keyframes_extract'] upload files",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file_upload",
+									"type": "file",
+									"src": "/D:/Code Space/Projects/V Space/Shorts_Videos/market.mp4"
+								},
+								{
+									"key": "mode",
+									"value": "standalone",
+									"description": "standalone / default:chained",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5001/keyframe_extract",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5001",
+							"path": [
+								"keyframe_extract"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "['/'] status",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/vishw/Downloads/Newfolder/test3.mp4",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5001/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5001",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search",
+			"item": [
+				{
+					"name": "['/search'] search",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "search_query",
+									"value": "pen",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5003/search",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5003",
+							"path": [
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "['/'] status",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "search_query",
+									"value": "pen",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5003/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5003",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "media server",
+			"item": [
+				{
+					"name": "Add all videos",
+					"item": [
+						{
+							"name": "['/add_video'] notes",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file_upload",
+											"type": "file",
+											"src": "/D:/Code Space/Projects/V Space/Shorts_Videos/HOW_TO_ORGANISE_NOTES.mp4"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5004/add_video",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5004",
+									"path": [
+										"add_video"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "['/add_video'] market",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file_upload",
+											"type": "file",
+											"src": "/D:/Code Space/Projects/V Space/Shorts_Videos/market.mp4"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5004/add_video",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5004",
+									"path": [
+										"add_video"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "['/add_video'] swimming",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file_upload",
+											"type": "file",
+											"src": "/D:/Code Space/Projects/V Space/Shorts_Videos/swimming_pool_360p.mp4"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5004/add_video",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5004",
+									"path": [
+										"add_video"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "['/add_video'] vaathi",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file_upload",
+											"type": "file",
+											"src": "/D:/Code Space/Projects/V Space/Shorts_Videos/vaathi_walking.mp4"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5004/add_video",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5004",
+									"path": [
+										"add_video"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "['/add_video'] upload video",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file_upload",
+									"type": "file",
+									"src": "/D:/Code Space/Projects/V Space/Shorts_Videos/HOW_TO_ORGANISE_NOTES.mp4",
+									"disabled": true
+								},
+								{
+									"key": "file_upload",
+									"type": "file",
+									"src": "/D:/Code Space/Projects/V Space/Shorts_Videos/market.mp4",
+									"disabled": true
+								},
+								{
+									"key": "file_upload",
+									"type": "file",
+									"src": "/D:/Code Space/Projects/V Space/Shorts_Videos/swimming_pool_360p.mp4",
+									"disabled": true
+								},
+								{
+									"key": "file_upload",
+									"type": "file",
+									"src": "/D:/Code Space/Projects/V Space/Shorts_Videos/vaathi_walking.mp4",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5004/add_video",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5004",
+							"path": [
+								"add_video"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "['/get_video'] retrieve video",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file_name",
+									"value": "HOW_TO_ORGANISE_NOTES",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5004/get_video",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5004",
+							"path": [
+								"get_video"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "['/'] status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5004/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5004",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
