@@ -10,7 +10,7 @@
 			"name": "Vision Transformer",
 			"item": [
 				{
-					"name": "['/index'] classify keyframes",
+					"name": "['/video-index'] classify keyframes",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -20,7 +20,8 @@
 								{
 									"key": "dir",
 									"value": "key_frames",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "file_upload",
@@ -29,7 +30,7 @@
 								},
 								{
 									"key": "vid_name",
-									"value": "vaathi_walking",
+									"value": "DIML_12",
 									"type": "text"
 								},
 								{
@@ -41,7 +42,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:5002/index",
+							"raw": "http://127.0.0.1:5002/video-index",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -51,7 +52,7 @@
 							],
 							"port": "5002",
 							"path": [
-								"index"
+								"video-index"
 							]
 						}
 					},
@@ -95,13 +96,38 @@
 								{
 									"key": "file_upload",
 									"type": "file",
-									"src": "/D:/Code Space/Projects/V Space/Shorts_Videos/market.mp4"
+									"src": "/D:/Code Space/Projects/V Space/Shorts_Videos/swimming_pool_360p.mp4",
+									"disabled": true
+								},
+								{
+									"key": "file_upload",
+									"type": "file",
+									"src": "/D:/Code Space/Projects/V Space/Shorts_Videos/HOW_TO_ORGANISE_NOTES.mp4",
+									"disabled": true
+								},
+								{
+									"key": "file_upload",
+									"type": "file",
+									"src": "/D:/Code Space/Projects/V Space/Shorts_Videos/vaathi_walking.mp4",
+									"disabled": true
+								},
+								{
+									"key": "file_upload",
+									"type": "file",
+									"src": "/D:/Code Space/Projects/V Space/Shorts_Videos/market.mp4",
+									"disabled": true
 								},
 								{
 									"key": "mode",
 									"value": "standalone",
 									"description": "standalone / default:chained",
-									"type": "text"
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "file_upload",
+									"type": "file",
+									"src": "/C:/Users/vishw/Music/holland_BrEn.mp4"
 								}
 							]
 						},
@@ -165,21 +191,109 @@
 			"item": [
 				{
 					"name": "['/search'] search",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var template = `\r",
+									"<style type=\"text/css\">\r",
+									"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+									"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+									"    .tftable tr {background-color:#ffffff;}\r",
+									"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+									"    .tftable tr:hover {background-color:#e0ffff;}\r",
+									"</style>\r",
+									"\r",
+									"<table class=\"tftable\" border=\"1\">\r",
+									"var schema = {\r",
+									"  \"items\": {\r",
+									"    \"type\": \"boolean\"\r",
+									"  }\r",
+									"};\r",
+									"\r",
+									"var data1 = [true, false];\r",
+									"var data2 = [true, 123];\r",
+									"\r",
+									"pm.test('Schema is valid', function() {\r",
+									"  pm.expect(tv4.validate(data1, schema)).to.be.true;\r",
+									"  pm.expect(tv4.validate(data2, schema)).to.be.true;\r",
+									"});\r",
+									"var jsonObject = xml2Json(responseBody);\r",
+									"pm.test(\"Status code name has string\", function () {\r",
+									"    pm.response.to.have.status(\"Created\");\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"pm.test(\"Status code name has string\", function () {\r",
+									"    pm.response.to.have.status(\"Created\");\r",
+									"});\r",
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"pm.test(\"Body is correct\", function () {\r",
+									"    pm.response.to.have.body(\"response_body_string\");\r",
+									"});\r",
+									"    <tr>\r",
+									"        <th>Category List</th>\r",
+									"        <th>File Name</th>\r",
+									"        <th>Match Type</th>\r",
+									"        <th>Video ID</th>\r",
+									"    </tr>\r",
+									"    \r",
+									"    {{#each response.results}}\r",
+									"        <tr>\r",
+									"            <td>{{category_list}}</td>\r",
+									"            <td>{{file_name}}</td>\r",
+									"            <td>{{match_type}}</td>\r",
+									"            <td>{{video_id}}</td>\r",
+									"        </tr>\r",
+									"    {{/each}}\r",
+									"</table>\r",
+									"`;\r",
+									"\r",
+									"function constructVisualizerPayload() {\r",
+									"    return {response: pm.response.json()}\r",
+									"}\r",
+									"\r",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "formdata",
 							"formdata": [
 								{
 									"key": "search_query",
-									"value": "pen",
-									"type": "text"
+									"value": "pictures of me in market with shovel",
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
 						"url": {
-							"raw": "http://127.0.0.1:5003/search",
+							"raw": "http://127.0.0.1:5003/search?query=pictures of me in market and shovel",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -190,6 +304,17 @@
 							"port": "5003",
 							"path": [
 								"search"
+							],
+							"query": [
+								{
+									"key": "query",
+									"value": "pictures of me in market and shovel"
+								},
+								{
+									"key": "query",
+									"value": "a racing truck was hit by the police and the driver ran off",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -399,6 +524,29 @@
 									"type": "file",
 									"src": "/D:/Code Space/Projects/V Space/Shorts_Videos/vaathi_walking.mp4",
 									"disabled": true
+								},
+								{
+									"key": "file_upload",
+									"type": "file",
+									"src": "/C:/Users/vishw/Music/holland_BrEn.mp4",
+									"disabled": true
+								},
+								{
+									"key": "file_upload",
+									"type": "file",
+									"src": "/D:/Code Space/Projects/V Space/Shorts_Videos/DIML_1.mp4",
+									"disabled": true
+								},
+								{
+									"key": "file_upload",
+									"type": "file",
+									"src": "/D:/Code Space/Projects/V Space/Shorts_Videos/DIML_2.mp4",
+									"disabled": true
+								},
+								{
+									"key": "file_upload",
+									"type": "file",
+									"src": "/D:/Code Space/Projects/V Space/Shorts_Videos/interview_1.mp4"
 								}
 							]
 						},
@@ -430,6 +578,18 @@
 								{
 									"key": "file_name",
 									"value": "HOW_TO_ORGANISE_NOTES",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "file_name",
+									"value": "holland_BrEn",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "file_name",
+									"value": "DIML_1",
 									"type": "text"
 								}
 							]
@@ -468,6 +628,67 @@
 							"port": "5004",
 							"path": [
 								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "asr",
+			"item": [
+				{
+					"name": "['/speech-recog'] speech recognition",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "dir",
+									"value": "key_frames",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "file_upload",
+									"type": "file",
+									"src": "/D:/Code Space/Projects/V Space/Shorts_Videos/DIML_1.mp4"
+								},
+								{
+									"key": "vid_name",
+									"value": "holland_BrEn",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "mode",
+									"value": "standalone",
+									"description": "standalone / default:db",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "mode",
+									"value": "db",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5005/speech-index",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5005",
+							"path": [
+								"speech-index"
 							]
 						}
 					},

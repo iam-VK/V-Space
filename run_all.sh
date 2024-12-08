@@ -10,5 +10,6 @@ run_microservice "search" &
 run_microservice "frame_extractor" &
 run_microservice "media_server" &
 run_microservice "Vision_Transformer" &
+run_microservice "speech_recog" &
 
 wait

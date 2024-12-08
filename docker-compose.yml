@@ -1,5 +1,5 @@
 version: '3.8'
-name: v_space
+name: v_space_v1
 
 services:
   mysql-server:
@@ -19,7 +19,8 @@ services:
       - custom_network
 
   media-server:
-    build: ./media_server
+    # build: ./media_server
+    image: v_space-media-server:latest
     container_name: media-server
     restart: unless-stopped
     depends_on:
@@ -30,7 +31,8 @@ services:
       - custom_network
 
   search:
-    build: ./search
+    # build: ./search
+    image: v_space-search:latest
     container_name: search
     restart: unless-stopped
     depends_on:
@@ -41,7 +43,8 @@ services:
       - custom_network
 
   ml-models:
-    build: ./Vision_Transformer
+    # build: ./Vision_Transformer
+    image: v_space-ml-models:latest
     container_name: ml-models
     restart: unless-stopped
     depends_on:
@@ -52,7 +55,8 @@ services:
       - custom_network
 
   frame-extractor:
-    build: ./frame_extractor
+    # build: ./frame_extractor
+    image: v_space-frame-extractor:latest
     container_name: frame-extractor
     restart: unless-stopped
     depends_on:
@@ -64,7 +68,8 @@ services:
       - custom_network
 
   web-application:
-    build: ./frontend
+    # build: ./frontend
+    image: v_space-web-application:latest
     container_name: web-application
     restart: unless-stopped
     depends_on:

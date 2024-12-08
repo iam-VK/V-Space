@@ -23,12 +23,11 @@ DROP TABLE IF EXISTS `videos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `videos` (
-  `video_id` int NOT NULL AUTO_INCREMENT,
+  `file_id` int NOT NULL AUTO_INCREMENT,
   `file_name` varchar(255) DEFAULT NULL,
   `file_path` varchar(255) DEFAULT NULL,
-  `index_state` int DEFAULT '0',
-  PRIMARY KEY (`video_id`),
-  CONSTRAINT `videos_chk_1` CHECK (((`index_state` = 0) or (`index_state` = 1)))
+  index_state ENUM('None', 'vision', 'speech', 'vsn-sph') NOT NULL DEFAULT 'None',
+  PRIMARY KEY (`file_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -73,12 +72,12 @@ DROP TABLE IF EXISTS `video_categories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `video_categories` (
-  `video_id` int DEFAULT NULL,
+  `file_id` int DEFAULT NULL,
   `category_id` varchar(20) DEFAULT NULL,
   `frequency` int DEFAULT NULL,
-  KEY `video_id` (`video_id`),
+  KEY `file_id` (`file_id`),
   KEY `category_id` (`category_id`),
-  CONSTRAINT `video_categories_ibfk_1` FOREIGN KEY (`video_id`) REFERENCES `videos` (`video_id`),
+  CONSTRAINT `video_categories_ibfk_1` FOREIGN KEY (`file_id`) REFERENCES `videos` (`file_id`),
   CONSTRAINT `video_categories_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -101,7 +100,7 @@ DROP TABLE IF EXISTS `video_index`;
 SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `video_index` AS SELECT 
- 1 AS `video_id`,
+ 1 AS `file_id`,
  1 AS `file_name`,
  1 AS `file_path`,
  1 AS `category_id`,
@@ -122,7 +121,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`groot`@`%` SQL SECURITY DEFINER */
-/*!50001 VIEW `video_index` AS select `videos`.`video_id` AS `video_id`,`videos`.`file_name` AS `file_name`,`videos`.`file_path` AS `file_path`,`categories`.`category_id` AS `category_id`,`categories`.`category_name` AS `category_name`,count(0) AS `frequency` from ((`videos` left join `video_categories` on((`videos`.`video_id` = `video_categories`.`video_id`))) left join `categories` on((`video_categories`.`category_id` = `categories`.`category_id`))) group by `videos`.`video_id`,`videos`.`file_name`,`categories`.`category_name`,`categories`.`category_id` */;
+/*!50001 VIEW `video_index` AS select `videos`.`file_id` AS `file_id`,`videos`.`file_name` AS `file_name`,`videos`.`file_path` AS `file_path`,`categories`.`category_id` AS `category_id`,`categories`.`category_name` AS `category_name`,count(0) AS `frequency` from ((`videos` left join `video_categories` on((`videos`.`file_id` = `video_categories`.`file_id`))) left join `categories` on((`video_categories`.`category_id` = `categories`.`category_id`))) group by `videos`.`file_id`,`videos`.`file_name`,`categories`.`category_name`,`categories`.`category_id` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
